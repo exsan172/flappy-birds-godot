@@ -12,7 +12,7 @@ var start = false
 var life = true
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("flap") && life:
+	if Input.is_action_pressed("flap") && life:
 		if !start:
 			start_game()
 		flap()
