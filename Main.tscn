@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/textures/background.png" type="Texture" id=1]
+[ext_resource path="res://character/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environtment/Ground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environtment/Spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/UiScore.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Main.gd" type="Script" id=6]
+[ext_resource path="res://ui/Menu.tscn" type="PackedScene" id=7]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="UiScore" parent="." instance=ExtResource( 5 )]
+
+[node name="Menu" parent="." instance=ExtResource( 7 )]
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 67, 408 )
+
+[node name="Spawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 800, 0 )
+
+[node name="Ground" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 686 )
+
+[node name="Sprite" parent="Ground" index="0"]
+scale = Vector2( 1.5, 1.02381 )
+
+[connection signal="start_game" from="Menu" to="." method="_on_Menu_start_game"]
+[connection signal="died" from="Player" to="." method="_on_Player_died"]
+[connection signal="body_entered" from="Ground/dedZone" to="." method="_on_dedZone_body_entered"]
+
+[editable path="Ground"]
